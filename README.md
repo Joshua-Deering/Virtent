@@ -1,4 +1,4 @@
-## Vertent (*Virt*ual-Det*ent*): <br><small>A BLDC-actuated haptic interface for high-resolution system control</small>
+## Virtent (*Virt*ual-Det*ent*): <br><small>A BLDC-actuated haptic interface for high-resolution system control</small>
 A high-resolution, haptic-feedback scroll peripheral built on the ESP32 platform. Unlike mechanical scroll wheels, this device uses a Brushless DC (BLDC) motor to generate tactile "virtual detents," allowing for dynamic resistance, infinitely variable scrolling resolutions, and haptic alerts.
 
 ![3d Model of Scroll Wheel](./assets/Wheel%203d%20model.png)
