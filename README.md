@@ -1,7 +1,9 @@
 ## Virtent (*Virt*ual-Det*ent*): <br><small>A BLDC-actuated haptic interface for high-resolution system control</small>
 A high-resolution, haptic-feedback scroll peripheral built on the ESP32 platform. Unlike mechanical scroll wheels, this device uses a Brushless DC (BLDC) motor to generate tactile "virtual detents," allowing for dynamic resistance, infinitely variable scrolling resolutions, and haptic alerts.
 
-![3d Model of Scroll Wheel](./assets/Wheel%203d%20model.png)
+3d Model                   |  Soldered PCB
+:-------------------------:|:-------------------------:
+![3d Model of Scroll Wheel](./assets/Wheel%203d%20model.png)  |  ![Soldered PCB](./assets/pcb-soldered%20-%202.jpeg)
 
 ### Key Features
 **Virtual Haptic Detents**: Utilizes a BLDC motor for software-defined tactile feedback, allowing for "notched" or "smooth" scrolling modes.
@@ -47,11 +49,13 @@ This project is currently in the active prototyping phase.
 
 **Firmware**: Energy use profiling and optimization.
 
-### Planned Roadmap:
+### Roadmap:
 
-[ ] Complete reflow-soldered board.
+[✓] Complete reflow-soldered board.
 
-[ ] Implement software-defined "profiles" (e.g., high-resistance for volume, low-resistance for long documents).
+[ ] Implement software-defined "profiles" (e.g., large detents for volume, smooth detents for long documents).
+
+[ ] Complete computer connection integration (i.e bluetooth, computer app, configuration)
 
 [ ] Finalize enclosure, and print with Resin for better surface finish
 
