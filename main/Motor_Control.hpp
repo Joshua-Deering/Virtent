@@ -2,6 +2,8 @@
 
 #include <cstdint>
 
+#include "PinDefinitions.hpp"
+
 class MotorControl {
 public:
 
@@ -15,7 +17,7 @@ public:
     // for power saving modes
     void set_en(bool en) {
         enabled = en;
-        digitalWrite(EN, en ? HIGH : LOW);
+        digitalWrite(pin::TMC_EN, en ? HIGH : LOW);
     }
 
     void spin_open_loop(uint8_t pwm_strength) {
@@ -33,15 +35,6 @@ public:
 
 private:
     bool enabled = false;
-
-    const uint8_t EN = 18;
-
-    const uint8_t UH = 13;
-    const uint8_t UL = 14;
-    const uint8_t VH = 27;
-    const uint8_t VL = 26;
-    const uint8_t WH = 25;
-    const uint8_t WL = 33;
 
     // PWM parameters
     const uint32_t PWM_FREQ = 20000; // 20 kHz
@@ -92,85 +85,85 @@ private:
     }
 
     void set_motor_pin_modes() {
-        pinMode(EN, OUTPUT);
+        pinMode(pin::TMC_EN, OUTPUT);
 
-        pinMode(UH, OUTPUT);
-        pinMode(UL, OUTPUT);
-        pinMode(VH, OUTPUT);
-        pinMode(VL, OUTPUT);
-        pinMode(WH, OUTPUT);
-        pinMode(WL, OUTPUT);
+        pinMode(pin::TMC_UH, OUTPUT);
+        pinMode(pin::TMC_UL, OUTPUT);
+        pinMode(pin::TMC_VH, OUTPUT);
+        pinMode(pin::TMC_VL, OUTPUT);
+        pinMode(pin::TMC_WH, OUTPUT);
+        pinMode(pin::TMC_WL, OUTPUT);
     }
 
     void setup_pwm() {
         // Configure timer implicitly via channel setup
-        ledcAttach(UH, PWM_FREQ, PWM_RES);
-        ledcAttach(VH, PWM_FREQ, PWM_RES);
-        ledcAttach(WH, PWM_FREQ, PWM_RES);
+        ledcAttach(pin::TMC_UH, PWM_FREQ, PWM_RES);
+        ledcAttach(pin::TMC_VH, PWM_FREQ, PWM_RES);
+        ledcAttach(pin::TMC_WH, PWM_FREQ, PWM_RES);
 
         // Start with 0 duty
-        ledcWrite(UH, 0);
-        ledcWrite(VH, 0);
-        ledcWrite(WH, 0);
+        ledcWrite(pin::TMC_UH, 0);
+        ledcWrite(pin::TMC_VH, 0);
+        ledcWrite(pin::TMC_WH, 0);
     }
 
     void set_U_high(uint8_t duty) {
-        digitalWrite(UL, LOW);
+        digitalWrite(pin::TMC_UL, LOW);
         delayMicroseconds(2);
-        ledcWrite(UH, duty);
+        ledcWrite(pin::TMC_UH, duty);
     }
 
     void set_U_low() {
-        ledcWrite(UH, 0);
+        ledcWrite(pin::TMC_UH, 0);
         delayMicroseconds(2);
-        digitalWrite(UL, HIGH);
+        digitalWrite(pin::TMC_UL, HIGH);
     }
 
     void set_U_floating() {
-        ledcWrite(UH, 0);
-        digitalWrite(UL, LOW);
+        ledcWrite(pin::TMC_UH, 0);
+        digitalWrite(pin::TMC_UL, LOW);
     }
 
     void set_V_high(uint8_t duty) {
-        digitalWrite(VL, LOW);
+        digitalWrite(pin::TMC_VL, LOW);
         delayMicroseconds(2);
-        ledcWrite(VH, duty);
+        ledcWrite(pin::TMC_VH, duty);
     }
 
     void set_V_low() {
-        ledcWrite(VH, 0);
+        ledcWrite(pin::TMC_VH, 0);
         delayMicroseconds(2);
-        digitalWrite(VL, HIGH);
+        digitalWrite(pin::TMC_VL, HIGH);
     }
 
     void set_V_floating() {
-        ledcWrite(VH, 0);
-        digitalWrite(VL, LOW);
+        ledcWrite(pin::TMC_VH, 0);
+        digitalWrite(pin::TMC_VL, LOW);
     }
 
     void set_W_high(uint8_t duty) {
-        digitalWrite(WL, LOW);
+        digitalWrite(pin::TMC_WL, LOW);
         delayMicroseconds(2);
-        ledcWrite(WH, duty);
+        ledcWrite(pin::TMC_WH, duty);
     }
 
     void set_W_low() {
-        ledcWrite(WH, 0);
+        ledcWrite(pin::TMC_WH, 0);
         delayMicroseconds(2);
-        digitalWrite(WL, HIGH);
+        digitalWrite(pin::TMC_WL, HIGH);
     }
 
     void set_W_floating() {
-        ledcWrite(WH, 0);
-        digitalWrite(WL, LOW);
+        ledcWrite(pin::TMC_WH, 0);
+        digitalWrite(pin::TMC_WL, LOW);
     }
 
     void all_phases_off() {
-        ledcWrite(UH, 0);
-        ledcWrite(VH, 0);
-        ledcWrite(WH, 0);
-        digitalWrite(UL, LOW);
-        digitalWrite(VL, LOW);
-        digitalWrite(WL, LOW);
+        ledcWrite(pin::TMC_UH, 0);
+        ledcWrite(pin::TMC_VH, 0);
+        ledcWrite(pin::TMC_WH, 0);
+        digitalWrite(pin::TMC_UL, LOW);
+        digitalWrite(pin::TMC_VL, LOW);
+        digitalWrite(pin::TMC_WL, LOW);
     }
 };

@@ -4,9 +4,17 @@
 
 namespace ssi {
 
+    enum MagStatus {
+        OK,
+        TOO_STRONG,
+        TOO_WEAK
+    };
+
     struct EncoderData {
         double angle;
-        uint8_t status;
+        bool loss_of_track;
+        bool push;
+        MagStatus mag_status;
         // MSB -> LSB
         // bit 3: loss of track
         // bit 2: push
@@ -22,8 +30,11 @@ namespace ssi {
                 delayMicroseconds(1);
                 digitalWrite(CLK_PIN, HIGH);
                 delayMicroseconds(1);
-                data = (data << 1) | digitalRead(DO_PIN);
+                int do_stat = digitalRead(DO_PIN);
+                data = (data << 1) | do_stat;
+                Serial.print(do_stat);
             }
+            Serial.println();
             return data;
         };
 
@@ -38,7 +49,13 @@ namespace ssi {
         unsigned int raw_crc = read_bits(6);
 
         out.angle = ((double)raw_angle / 16384.0) * 360.0;
-        out.status = (uint8_t)raw_status;
+        out.loss_of_track = ((raw_status >> 3) & 1) == 1;
+        out.push = ((raw_status >> 2) & 1) == 1;
+        if (((raw_status >> 1 ) & 1) == 1) {
+            out.mag_status = MagStatus::TOO_WEAK;
+        } else if (raw_status & 1 == 1) {
+            out.mag_status = MagStatus::TOO_STRONG;
+        } else out.mag_status = MagStatus::OK;
 
         // end angle read cycle
         digitalWrite(CSN_PIN, HIGH);
