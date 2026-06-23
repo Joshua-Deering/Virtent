@@ -53,11 +53,11 @@ This project is currently in the active prototyping phase.
 
 [✓] Complete reflow-soldered board.
 
-[ ] Implement software-defined "profiles" (e.g., large detents for volume, smooth detents for long documents).
+[✓] Implement software-defined "profiles" (e.g., large detents for volume, smooth detents for long documents).
 
-[ ] Complete computer connection integration (i.e bluetooth, computer app, configuration)
+[✓] Complete computer connection integration
 
-[ ] Finalize enclosure, and print with Resin for better surface finish
+[✓] Finalize enclosure
 
 ### Development Gallery
 
